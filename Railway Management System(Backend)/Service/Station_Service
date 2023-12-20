@@ -1,0 +1,22 @@
+package com.example.railway.service;
+
+import com.example.railway.model.Station;
+import com.example.railway.repository.StationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class StationService {
+    @Autowired
+    private StationRepository stnrepository;
+
+    public List<Station> savestn (List<Station> stn){
+        return stnrepository.saveAll(stn);
+    }
+
+    public List<Station> getstn () {
+        return stnrepository.findAll();
+    }
+}

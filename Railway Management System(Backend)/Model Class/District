@@ -1,0 +1,28 @@
+package com.example.railway.model;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "district")
+public class District {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dst_id;
+
+    @Column
+    private String dst_name;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "dv_id")
+    private Division division;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dst_id")
+    private Set<Station> station;
+}

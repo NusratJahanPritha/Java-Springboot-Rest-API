@@ -1,0 +1,26 @@
+package com.example.railway.controller;
+
+import com.example.railway.model.Booking_table;
+import com.example.railway.service.BkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class BkController {
+    @Autowired
+    private BkService bkservice;
+
+    @PostMapping("/bk")
+    public List<Booking_table> savebk (@RequestBody List<Booking_table> bk){
+        return bkservice.savebk(bk);
+    }
+    @GetMapping("/bklist")
+    public List<Booking_table> getbk () {
+        return bkservice.getbk();
+    }
+}

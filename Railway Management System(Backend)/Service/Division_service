@@ -1,0 +1,24 @@
+package com.example.railway.service;
+
+import com.example.railway.model.Division;
+import com.example.railway.repository.DvRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DvService {
+    @Autowired
+    private DvRepository dvrepository;
+
+    public List<Division> savedv (List<Division> dv){
+        return dvrepository.saveAll(dv);
+    }
+
+    public List<Division> getdv (){
+        return dvrepository.findAll();
+    }
+
+
+}

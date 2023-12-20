@@ -1,0 +1,10 @@
+package com.example.railway.DTO;
+
+public interface TrainDTO {
+    String gettname();
+    String getstname();
+    String getdstname();
+    String getdvname();
+    String gettime();
+    String getnoofseats();
+}

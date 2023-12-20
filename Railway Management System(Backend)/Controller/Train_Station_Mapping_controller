@@ -1,0 +1,27 @@
+package com.example.railway.controller;
+
+import com.example.railway.model.Train_station;
+import com.example.railway.service.TSMService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class TSMController {
+    @Autowired
+    private TSMService tsmservice;
+
+    @PostMapping("/tsm")
+    public List<Train_station> savetsm (@RequestBody List<Train_station> tsm){
+        return tsmservice.savetsm(tsm);
+    }
+    @GetMapping("/tsmlist")
+    public List<Train_station> gettsms () {
+        return tsmservice.gettsm();
+    }
+
+}

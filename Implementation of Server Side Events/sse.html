@@ -1,0 +1,86 @@
+<htm>
+  <head>
+    <title>Real time events</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+    .navbar {
+      min-height: 80px;
+    }
+    .navbar-brand {
+      margin: auto;
+      font-size: 2.6rem;
+    }
+    .panel {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    h3 {
+      color: blue;
+    }
+    .pstyle {
+      font-size: 2 rem;
+      font-family: Verdana, sans-serif;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      var userID = Math.floor(Math.random() * 1000 + 1);
+      $("#userspan").text(userID);
+      var urlEndPoint = "http://localhost:6033/subscribe?userID=" + userID;
+      var eventSource = new EventSource(urlEndPoint);
+
+      eventSource.addEventListener("latestNews", function (event) {
+        var articleData = JSON.parse(event.data);
+        addBlock(articleData.title, articleData.text);
+      });
+    });
+
+    // evtSource.addEventListener("error", function (event) {
+    //   console.log("Error" + event.currentTarget.readyState);
+    //   if (event.currentTarget.readyState == EventSource.CLOSED) {
+    //   } else {
+    //     evtSource.close();
+    //   }
+    // });
+
+    // window.onbeforeunload = function () {
+    //   evtSource.close();
+    // };
+
+    function addBlock(title, text) {
+      var a = document.createElement("article");
+      var h = document.createElement("H3");
+      var t = document.createTextNode(title);
+      h.appendChild(t);
+      var para = document.createElement("P");
+      para.innerHTML = text;
+      a.appendChild(h);
+      a.appendChild(para);
+      document.getElementById("pack").appendChild(a);
+    }
+  </script>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div class="navbar-brand">Latest News</div>
+        </div>
+      </div>
+    </nav>
+    
+      <div class="panel panel-primary text-center">
+        <h4>
+          News Timeline for User <span id="userspan" class="spanStyle"></h4></span>
+        
+      </div>
+      <div class="container pstyle text-center" , id="pack"></div>
+    </div>
+  </body>
+</htm>

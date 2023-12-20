@@ -1,0 +1,24 @@
+package com.example.railway.repository;
+import com.example.railway.DTO.TrainDTO;
+import com.example.railway.model.Station;
+import com.example.railway.model.Train;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
+
+@Repository
+public interface TrainRepository extends JpaRepository<Train, Long> {
+    @Query(value = "SELECT train.tname as tname, Station.st_name as stname, District.dst_name as dstname,Division.dv_name as dvname FROM train INNER JOIN train_station_mapping ON train.train_id=train_station_mapping.train_id INNER JOIN Station ON train_station_mapping.st_id=station.st_id INNER JOIN District ON Station.dst_id=District.dst_id INNER JOIN Division ON District.dv_id=Division.dv_id", nativeQuery = true)
+    List<TrainDTO> findtrain();
+    @Query(value = "SELECT train.tname as tname, Station.st_name as stname, train_station_mapping.time as time, train.no_of_seats as noofseats FROM train INNER JOIN train_station_mapping ON train.train_id=train_station_mapping.train_id INNER JOIN Station ON train_station_mapping.st_id=station.st_id", nativeQuery = true)
+    List<TrainDTO> findtraintime();
+    /*@Query(value = "SELECT train.tname as tname, Station.st_name as stname, train_station_mapping.time as time, train.no_of_seats as noofseats FROM train INNER JOIN train_station_mapping ON train.train_id=train_station_mapping.train_id INNER JOIN Station ON train_station_mapping.st_id=station.st_id Order by time ASC;", nativeQuery = true)
+    List<TrainDTO> findtraintime();*/
+    @Query(value = "SELECT train.tname as tname, Station.st_name as stname, train_station_mapping.time as time, train.no_of_seats as noofseats FROM train INNER JOIN train_station_mapping ON train.train_id=train_station_mapping.train_id INNER JOIN Station ON train_station_mapping.st_id=station.st_id WHERE train_station_mapping.time=:time", nativeQuery = true)
+    List<TrainDTO> search(@Param("time") String time);
+
+}

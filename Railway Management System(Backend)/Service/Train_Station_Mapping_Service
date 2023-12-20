@@ -1,0 +1,24 @@
+package com.example.railway.service;
+
+import com.example.railway.model.Train_station;
+import com.example.railway.repository.TSMRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TSMService {
+    @Autowired
+    private TSMRepository tsmrepository;
+
+    public List<Train_station> savetsm (List<Train_station> tsm){
+        return tsmrepository.saveAll(tsm);
+    }
+
+    public List<Train_station> gettsm (){
+        return tsmrepository.findAll();
+    }
+
+
+}

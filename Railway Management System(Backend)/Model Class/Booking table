@@ -1,0 +1,33 @@
+package com.example.railway.model;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "Booking_table")
+
+public class Booking_table {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    private String passenger_name;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "booked_at")
+    private Date bookeddAt = new Date();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "train_id")
+    private Train train;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "st_id")
+    private Station station;
+}

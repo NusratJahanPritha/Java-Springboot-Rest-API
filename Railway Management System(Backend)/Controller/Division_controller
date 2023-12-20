@@ -1,0 +1,26 @@
+package com.example.railway.controller;
+import com.example.railway.model.Division;
+import com.example.railway.service.DvService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class DvController {
+    @Autowired
+    private DvService dvservice;
+
+    @PostMapping("/dv")
+    public List<Division> savedv (@RequestBody List<Division> dv){
+        return dvservice.savedv(dv);
+    }
+    @GetMapping("/dvlist")
+    public List<Division> getdv (){
+        return dvservice.getdv();
+    }
+
+}

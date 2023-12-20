@@ -1,0 +1,7 @@
+package com.example.railway.DTO;
+
+public interface DstDTO {
+    String getstname();
+    String getdstname();
+    String getdvname();
+}

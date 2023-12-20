@@ -1,0 +1,28 @@
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "train_station_mapping")
+/*@Embeddable*/
+public class Train_station {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ts_id;
+
+    @OneToOne
+    @JoinColumn(name="train_id")
+    private Train train;
+
+    @OneToOne
+    @JoinColumn(name="st_id")
+    private Station station;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "time")
+    private Date timeAt = new Date();
+}

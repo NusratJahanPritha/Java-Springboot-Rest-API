@@ -1,0 +1,40 @@
+package com.example.railway.controller;
+import com.example.railway.DTO.TrainDTO;
+import com.example.railway.model.Train;
+import com.example.railway.repository.TrainRepository;
+import com.example.railway.service.TrainService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.Date;
+import java.util.List;
+
+@RestController
+public class TrainController {
+    @Autowired
+    private TrainService trainservice;
+    @Autowired
+    private TrainRepository trainRepository;
+    @PostMapping("/train")
+    public List<Train> savetrain (@RequestBody List<Train> train){
+        return trainservice.saveTrain(train);
+    }
+    @GetMapping("/trainlist")
+    public List<Train> getTrains (){
+        return trainservice.getTrains();
+    }
+    @GetMapping ("/get_station_list")
+    public List<TrainDTO> listtrain() {
+        return trainRepository.findtrain();
+    }
+    @GetMapping ("/get_train_list")
+    public List<TrainDTO> listtraintime(){
+        return trainRepository.findtraintime();
+    }
+    @GetMapping ("/search/{time}")
+    public List<TrainDTO> listsearch(@PathVariable("time") String time){
+        return trainRepository.search(time);
+    }
+
+}

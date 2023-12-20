@@ -1,0 +1,24 @@
+package com.example.railway.service;
+
+import com.example.railway.model.Booking_table;
+import com.example.railway.repository.BkRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BkService {
+    @Autowired
+    private BkRepository bkrepository;
+
+    public List<Booking_table> savebk (List<Booking_table> bk){
+        return bkrepository.saveAll(bk);
+    }
+
+    public List<Booking_table> getbk (){
+        return bkrepository.findAll();
+    }
+
+
+}

@@ -1,0 +1,22 @@
+package com.example.railway.service;
+
+import com.example.railway.model.District;
+import com.example.railway.repository.DstRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DstService {
+    @Autowired
+    private DstRepository dstrepository;
+
+    public List<District> savedst (List<District> dst){
+        return dstrepository.saveAll(dst);
+    }
+
+    public List<District> getdst (){
+        return dstrepository.findAll();
+    }
+}
